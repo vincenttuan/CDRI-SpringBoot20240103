@@ -56,7 +56,7 @@
 			</tbody>
 			<tfoot>
 				<td colspan="7" align="right">總平均:</td>
-				<td>0</td>
+				<td th:text="${#numbers.formatDecimal(averageScore, 1, 1)}">0</td>
 			</tfoot>
 		</table>
 	</body>

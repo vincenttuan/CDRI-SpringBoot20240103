@@ -36,7 +36,14 @@ public class StudentScoreController {
 				.sorted(Comparator.comparingInt(StudentScore::getTotalScore).reversed())
 				.collect(Collectors.toList());
 		
+		// 計算總平均
+		double averageScore = scores.stream()
+				.mapToDouble(StudentScore::getAverageScore)
+				.average()
+				.orElse(0.0);
+		
 		model.addAttribute("scores", sortedScores);
+		model.addAttribute("averageScore", averageScore);
 		return "student_score";
 	}
 	
