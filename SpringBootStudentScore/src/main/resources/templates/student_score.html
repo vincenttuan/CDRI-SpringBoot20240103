@@ -14,6 +14,37 @@
 	
 	</head>
 	<body style="padding: 15px;">
-	
+		<h2>學生成績列表</h2>
+		<table class="pure-table pure-table-bordered">
+			<thead>
+				<tr>
+					<th>名次</th>
+					<th>ID</th>
+					<th>姓名</th>
+					<th>國文</th>
+					<th>英文</th>
+					<th>數學</th>
+					<th>總分</th>
+					<th>平均</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="score : ${ scores }">
+					<td>0</td>
+					<td th:text="${score.id}"></td>
+					<td th:text="${score.name}"></td>
+					<td th:text="${score.chineseScore}"></td>
+					<td th:text="${score.englishScore}"></td>
+					<td th:text="${score.mathScore}"></td>
+					<td th:text="${score.totalScore}"></td>
+					<td th:text="${score.averageScore}"></td>
+				</tr>
+			</tbody>
+		</table>
 	</body>
 </html>
+
+
+
+
+
