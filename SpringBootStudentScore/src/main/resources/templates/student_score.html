@@ -21,6 +21,11 @@
 				});
 			});
 		</script>
+		<style type="text/css">
+			.fail {
+				color: red;
+			}
+		</style>
 	</head>
 	<body style="padding: 15px;">
 		<h2>學生成績列表</h2>
@@ -42,9 +47,9 @@
 					<td th:text="${state.count}">0</td>
 					<td th:text="${score.id}"></td>
 					<td th:text="${score.name}"></td>
-					<td th:text="${score.chineseScore}"></td>
-					<td th:text="${score.englishScore}"></td>
-					<td th:text="${score.mathScore}"></td>
+					<td th:text="${score.chineseScore}" th:classappend="${score.chineseScore < 60} ? 'fail'"></td>
+					<td th:text="${score.englishScore}" th:classappend="${score.englishScore < 60} ? 'fail'"></td>
+					<td th:text="${score.mathScore}" th:classappend="${score.mathScore < 60} ? 'fail'"></td>
 					<td th:text="${score.totalScore}"></td>
 					<td th:text="${#numbers.formatDecimal(score.averageScore, 1, 1)}"></td>
 				</tr>
