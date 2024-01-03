@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,8 @@ import com.example.demo.entity.StudentScore;
 import com.example.demo.repository.StudentScoreRepository;
 import com.github.javafaker.Faker;
 
+
+
 @Controller
 @RequestMapping("/student-score")
 public class StudentScoreController {
@@ -23,9 +27,10 @@ public class StudentScoreController {
 	private StudentScoreRepository studentScoreRepository;
 	
 	@GetMapping("/")
-	@ResponseBody
-	public String index() {
-		return studentScoreRepository.findAll().toString();
+	public String index(Model model) {
+		List<StudentScore> scores = studentScoreRepository.findAll();
+		model.addAttribute("scores", scores);
+		return "student_score";
 	}
 	
 	@GetMapping("/{id}")
