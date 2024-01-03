@@ -55,8 +55,12 @@
 				</tr>
 			</tbody>
 			<tfoot>
-				<td colspan="7" align="right">總平均:</td>
-				<td th:text="${#numbers.formatDecimal(averageScore, 1, 1)}">0</td>
+				<td colspan="7" align="right">高標/低標的總平均:</td>
+				<td>
+					<span th:text="${#numbers.formatDecimal(top25AverageScore, 1, 1)}">0</span>
+					/
+					<span th:text="${#numbers.formatDecimal(averageScore, 1, 1)}">0</span>
+				</td>
 			</tfoot>
 		</table>
 	</body>

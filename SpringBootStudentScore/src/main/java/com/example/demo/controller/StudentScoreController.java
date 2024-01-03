@@ -36,13 +36,22 @@ public class StudentScoreController {
 				.sorted(Comparator.comparingInt(StudentScore::getTotalScore).reversed())
 				.collect(Collectors.toList());
 		
-		// 計算總平均
+		// 計算前 25% 的平均(高標)
+		int top25Count = (int)(sortedScores.size() * 0.25);
+		double top25AverageScore = sortedScores.stream()
+				.limit(top25Count)
+				.mapToDouble(StudentScore::getAverageScore)
+				.average()
+				.orElse(0.0);
+		
+		// 計算總平均(低標)
 		double averageScore = scores.stream()
 				.mapToDouble(StudentScore::getAverageScore)
 				.average()
 				.orElse(0.0);
 		
 		model.addAttribute("scores", sortedScores);
+		model.addAttribute("top25AverageScore", top25AverageScore);
 		model.addAttribute("averageScore", averageScore);
 		return "student_score";
 	}
