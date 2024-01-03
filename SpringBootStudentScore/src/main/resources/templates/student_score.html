@@ -42,7 +42,12 @@
 					},
 					// 設定匯出功能
 					dom: 'lBfrtip',
-					buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+					buttons: [
+						{extend: 'copy', text: '複製', className:'pure-button pure-button-primary'}, 
+						{extend: 'csv', text: 'CSV', className:'pure-button'}, 
+						{extend: 'excel', text: 'EXCEL', className:'pure-button'}, 
+						{extend: 'print', text: 'PDF/列印', className:'pure-button pure-button-primary'}
+					]
 				
 				});
 			});
