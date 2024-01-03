@@ -14,22 +14,22 @@ public class StudentScore {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "name", length = 255, nullable = true, unique = false) // 預設值可以不寫
+	//@Column(name = "name", length = 255, nullable = true, unique = false) // 預設值可以不寫
 	private String name;
 	
-	@Column(columnDefinition = "Integer default 0")
+	//@Column(columnDefinition = "Integer default 0")
 	private Integer chineseScore;
 	
-	@Column(columnDefinition = "Integer default 0")
+	//@Column(columnDefinition = "Integer default 0")
 	private Integer englishScore;
 	
-	@Column(columnDefinition = "Integer default 0")
+	//@Column(columnDefinition = "Integer default 0")
 	private Integer mathScore;
 	
-	@Column(columnDefinition = "Integer default 0")
+	//@Column(columnDefinition = "Integer default 0")
 	private Integer totalScore;
 	
-	@Column(columnDefinition = "Double default 0")
+	//@Column(columnDefinition = "Double default 0")
 	private Double averageScore;
 	
 }
