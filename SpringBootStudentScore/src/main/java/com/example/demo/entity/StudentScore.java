@@ -32,4 +32,9 @@ public class StudentScore {
 	//@Column(columnDefinition = "Double default 0")
 	private Double averageScore;
 	
+	// 更新總分與平均
+	public void updateTotalAndAverage() {
+		setTotalScore(chineseScore + englishScore + mathScore);
+		setAverageScore(totalScore / 3.0);
+	}
 }

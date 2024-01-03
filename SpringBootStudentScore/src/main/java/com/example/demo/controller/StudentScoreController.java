@@ -23,9 +23,10 @@ public class StudentScoreController {
 		return studentScoreRepository.findAll().toString();
 	}
 	
-	@PostMapping
+	@PostMapping("/")
 	@ResponseBody
 	public String add(StudentScore studentScore) {
+		studentScore.updateTotalAndAverage();
 		studentScoreRepository.save(studentScore);
 		return "Add OK";
 	}
