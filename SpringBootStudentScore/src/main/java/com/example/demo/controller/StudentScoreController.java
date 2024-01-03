@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +24,16 @@ public class StudentScoreController {
 	@ResponseBody
 	public String index() {
 		return studentScoreRepository.findAll().toString();
+	}
+	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public String getOne(@PathVariable("id") Integer id) {
+		Optional<StudentScore> studentScoreOpt = studentScoreRepository.findById(id);
+		if(studentScoreOpt.isPresent()) {
+			return studentScoreOpt.get() + "";
+		}
+		return "";
 	}
 	
 	@PostMapping("/")
