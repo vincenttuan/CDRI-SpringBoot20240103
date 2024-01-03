@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,12 @@ public class StudentScoreController {
 	@GetMapping("/")
 	public String index(Model model) {
 		List<StudentScore> scores = studentScoreRepository.findAll();
-		model.addAttribute("scores", scores);
+		// 根據總分進行降序排序
+		List<StudentScore> sortedScores = scores.stream()
+				.sorted(Comparator.comparingInt(StudentScore::getTotalScore).reversed())
+				.collect(Collectors.toList());
+		
+		model.addAttribute("scores", sortedScores);
 		return "student_score";
 	}
 	
