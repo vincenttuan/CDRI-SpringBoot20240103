@@ -6,18 +6,22 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.StudentScore;
 import com.example.demo.repository.StudentScoreRepository;
 import com.github.javafaker.Faker;
+
+import jakarta.transaction.Transactional;
 
 
 
@@ -90,6 +94,27 @@ public class StudentScoreController {
 		studentScore.updateTotalAndAverage();
 		studentScoreRepository.save(studentScore);
 		return "Add OK: " + studentScore;
+	}
+	
+	
+	@PutMapping("/{id}")
+	@ResponseBody
+	public String update(@PathVariable("id") Integer id, StudentScore uptStudentScore) {
+		// 根據 id 找到該筆資料
+		Optional<StudentScore> studentScoreOpt = studentScoreRepository.findById(id);
+		if(studentScoreOpt.isPresent()) {
+			StudentScore studentScore = studentScoreOpt.get();
+			
+			// "id", "totalScore", "averageScore" 不要複製, 其餘都要複製
+			BeanUtils.copyProperties(uptStudentScore, studentScore, "id", "totalScore", "averageScore");
+			studentScore.updateTotalAndAverage();
+			// 修改更新
+			studentScoreRepository.saveAndFlush(studentScore);
+			
+			return "Update OK";
+		}
+		return "Update Fail";
+		
 	}
 	
 	
