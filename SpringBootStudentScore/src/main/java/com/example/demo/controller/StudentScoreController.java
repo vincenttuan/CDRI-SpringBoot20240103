@@ -28,7 +28,7 @@ public class StudentScoreController {
 	public String add(StudentScore studentScore) {
 		studentScore.updateTotalAndAverage();
 		studentScoreRepository.save(studentScore);
-		return "Add OK";
+		return "Add OK: " + studentScore;
 	}
 	
 }
