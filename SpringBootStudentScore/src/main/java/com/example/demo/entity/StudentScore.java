@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Data;
 
 @Data
@@ -32,6 +34,8 @@ public class StudentScore {
 	//@Column(columnDefinition = "Double default 0")
 	private Double averageScore;
 	
+	@PreUpdate
+	@PrePersist
 	// 更新總分與平均
 	public void updateTotalAndAverage() {
 		setTotalScore(chineseScore + englishScore + mathScore);

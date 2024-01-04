@@ -83,7 +83,7 @@ public class StudentScoreController {
 			studentScore.setChineseScore(random.nextInt(101));
 			studentScore.setEnglishScore(random.nextInt(101));
 			studentScore.setMathScore(random.nextInt(101));
-			studentScore.updateTotalAndAverage();
+			//studentScore.updateTotalAndAverage();
 			studentScoreRepository.save(studentScore);
 		}
 		return "add 100 OK";
@@ -92,7 +92,7 @@ public class StudentScoreController {
 	@PostMapping("/")
 	@ResponseBody
 	public String add(StudentScore studentScore) {
-		studentScore.updateTotalAndAverage();
+		//studentScore.updateTotalAndAverage();
 		studentScoreRepository.save(studentScore);
 		return "Add OK: " + studentScore;
 	}
@@ -108,7 +108,7 @@ public class StudentScoreController {
 			
 			// "id", "totalScore", "averageScore" 不要複製, 其餘都要複製
 			BeanUtils.copyProperties(uptStudentScore, studentScore, "id", "totalScore", "averageScore");
-			studentScore.updateTotalAndAverage();
+			//studentScore.updateTotalAndAverage();
 			// 修改更新
 			studentScoreRepository.saveAndFlush(studentScore);
 			
