@@ -12,9 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.Data;
 
 @Entity
 @Table(name = "orders") // 因為 MySQL 不可以建立 Order 資料表 (因 Order 在 MySQL 中是保留字)
+@Data
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
