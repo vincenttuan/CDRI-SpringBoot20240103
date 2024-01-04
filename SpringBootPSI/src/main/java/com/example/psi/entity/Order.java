@@ -1,6 +1,8 @@
 package com.example.psi.entity;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -32,4 +36,9 @@ public class Order {
 	@JoinColumn(name = "customer_id")
 	@ManyToOne
 	private Customer customer;
-}
+	
+	@OneToMany(mappedBy = "order")
+	@OrderBy("id ASC")
+	private Set<OrderItem> orderItems = new LinkedHashSet<>();
+	
+}	
