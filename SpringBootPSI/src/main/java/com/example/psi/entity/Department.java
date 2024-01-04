@@ -18,4 +18,6 @@ public class Department {
 	
 	@Column
 	private String name; // 部門名稱
+	
+	
 }
