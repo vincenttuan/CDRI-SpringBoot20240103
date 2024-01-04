@@ -18,6 +18,6 @@ public class OrderItem {
 	private Integer amount; // 訂購數量
 	
 	@Column
-	private Integer price; // 商品價格
+	private Integer price; // 商品售價
 	
 }
