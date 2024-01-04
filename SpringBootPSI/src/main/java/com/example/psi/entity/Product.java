@@ -25,4 +25,5 @@ public class Product {
 	@Column
 	private Integer price; // 商品定價
 	
+	
 }
