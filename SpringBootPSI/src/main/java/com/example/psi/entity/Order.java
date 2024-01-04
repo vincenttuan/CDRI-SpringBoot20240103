@@ -41,4 +41,8 @@ public class Order {
 	@OrderBy("id ASC")
 	private Set<OrderItem> orderItems = new LinkedHashSet<>();
 	
+	@JoinColumn(name = "employee_id")
+	@ManyToOne
+	private Employee employee; 
+	
 }	
