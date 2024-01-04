@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -26,5 +28,14 @@ public class Purchase {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date; // 採購日期
+	
+	@JoinColumn(name = "supplier_id") // 供應商序號(外鍵)
+	@ManyToOne
+	private Supplier supplier;
+	
+	@JoinColumn(name = "employee_id") // 員工序號(外鍵)
+	@ManyToOne
+	private Employee employee;
+	
 	
 }
