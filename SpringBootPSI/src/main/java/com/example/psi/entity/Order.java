@@ -18,7 +18,7 @@ import jakarta.persistence.TemporalType;
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; // 員工序號
+	private Long id; // 訂單序號
 	
 	@Column
 	@Temporal(TemporalType.DATE)
