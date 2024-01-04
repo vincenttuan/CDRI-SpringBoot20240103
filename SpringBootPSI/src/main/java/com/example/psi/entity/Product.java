@@ -34,4 +34,8 @@ public class Product {
 	@OrderBy("id ASC")
 	private Set<PurchaseItem> purchaseItems = new LinkedHashSet<>();
 	
+	@OneToMany(mappedBy = "product")
+	@OrderBy("id ASC")
+	private Set<OrderItem> orderItems = new LinkedHashSet<>();
+	
 }
