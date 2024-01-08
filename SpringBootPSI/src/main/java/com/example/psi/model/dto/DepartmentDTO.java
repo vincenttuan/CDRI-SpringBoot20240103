@@ -24,7 +24,7 @@ public class DepartmentDTO {
 	private Long id;
 	private String name;
 	// 關聯資料
-	private Set<Employee> employees = new LinkedHashSet<>();
+	private Set<EmployeeDTO> employees = new LinkedHashSet<>();
 	// 其他業務資料可供渲染的欄位
 	
 }
