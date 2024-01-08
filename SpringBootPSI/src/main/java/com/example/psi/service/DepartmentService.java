@@ -46,11 +46,13 @@ public class DepartmentService {
 	public List<DepartmentDTO> findAll() {
 		List<Department> departments = departmentRepository.findAll();
 		return departments.stream()
-						  //.map(department -> modelMapper.map(department, DepartmentDTO.class))
+						  .map(department -> modelMapper.map(department, DepartmentDTO.class))
+						  /*
 						  .map(department -> {
 							  DepartmentDTO dto = new DepartmentDTO();
 							  dto.setId(department.getId());
 							  dto.setName(department.getName());
+							  
 							  Set<EmployeeDTO> empDtos = new LinkedHashSet<>();
 							  for(Employee emp : department.getEmployees()) {
 								  EmployeeDTO empDto = new EmployeeDTO();
@@ -59,8 +61,10 @@ public class DepartmentService {
 								  empDtos.add(empDto);
 							  }
 							  dto.setEmployees(empDtos);
+							  
 							  return dto;
 						  })
+						  */
 						  .toList();
 	}
 	
