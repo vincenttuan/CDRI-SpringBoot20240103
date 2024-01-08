@@ -5,6 +5,18 @@
 	<title>PSI 員工資料表</title>
 	<link rel="stylesheet"
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<style>
+        .pagination {
+            text-align: center; /* 中央對齊分頁 */
+        }
+        .pagination span {
+            margin: 0 5px; /* 分頁之間的間距 */
+        }
+        .pagination a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>		
 </head>
 <body>
 	<div class="container my-2">
@@ -27,6 +39,11 @@
 		</form>
 		<p />
 		<h1>全部員工列表</h1>
+		<div class="pagination">
+	        <span th:each="pageNum : ${#numbers.sequence(1, employeePageDTO.totalPage)}">
+	            <a th:href="@{/employee/(page=${pageNum - 1})}" th:text="${pageNum}">1</a>
+	        </span>
+	    </div>
 		<table border="1" class="table table-striped table-reposive-md">
 			<thead>
 				<tr>
@@ -38,7 +55,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="emp : ${employees}">
+				<tr th:each="emp : ${employeePageDTO.getEmployees()}">
 					<td th:text="${emp.id}"></td>
 					<td th:text="${emp.name}"></td>
 					<td>

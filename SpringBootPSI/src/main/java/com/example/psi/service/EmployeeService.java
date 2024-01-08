@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.psi.model.dto.DepartmentDTO;
 import com.example.psi.model.dto.EmployeeDTO;
+import com.example.psi.model.dto.EmployeePageDTO;
 import com.example.psi.model.po.Department;
 import com.example.psi.model.po.Employee;
 import com.example.psi.repository.DepartmentRepository;
@@ -39,23 +42,10 @@ public class EmployeeService {
 		employeeRepository.save(employee);
 	}
 	
-	// 全部查詢
-	public List<EmployeeDTO> findAll() {
-		List<Employee> employees = employeeRepository.findAll();
-		return employees.stream()
-						  .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
-						  /*
-						  .map(employee -> {
-							  EmployeeDTO employeeDTO = new EmployeeDTO();
-							  employeeDTO.setId(employee.getId());
-							  employeeDTO.setName(employee.getName());
-							  
-							  DepartmentDTO departmentDTO = modelMapper.map(employee.getDepartment(), DepartmentDTO.class);
-							  employeeDTO.setDepartment(departmentDTO);
-							  return employeeDTO;
-						  })
-						  */
-						  .toList();
+	// 全部查詢(分頁)
+	public EmployeePageDTO findAll(Pageable pageable) {
+		Page<Employee> empPage = employeeRepository.findAll(pageable);
+		Page<EmployeeDTO> empPageDTO = empPage.map(employee -> modelMapper.map(employee, EmployeeDTO.class));
+		return new EmployeePageDTO(empPageDTO);
 	}
-	
 }
