@@ -37,10 +37,11 @@ public class DepartmentService {
 		return null;
 	}
 	
-	public DepartmentDTO[] findAll() {
+	public List<DepartmentDTO> findAll() {
 		List<Department> departments = departmentRepository.findAll();
-		DepartmentDTO[] departmentDTOs = modelMapper.map(departments, DepartmentDTO[].class);
-		return departmentDTOs;
+		return departments.stream()
+						  .map(department -> modelMapper.map(department, DepartmentDTO.class))
+						  .toList();
 	}
 	
 }

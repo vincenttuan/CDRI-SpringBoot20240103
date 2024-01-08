@@ -1,5 +1,7 @@
 package com.example.psi.testing.read;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +46,7 @@ public class ReadDepartment {
 	@Test
 	public void readAll() {
 		System.out.println("readAll:");
-		DepartmentDTO[] departmentDTOs = departmentService.findAll();
+		List<DepartmentDTO> departmentDTOs = departmentService.findAll();
 		for(DepartmentDTO departmentDTO : departmentDTOs) {
 			System.out.println("id: " + departmentDTO.getId());
 			System.out.println("name: " + departmentDTO.getName());
