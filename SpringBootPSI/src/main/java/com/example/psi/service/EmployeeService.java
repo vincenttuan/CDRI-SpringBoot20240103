@@ -68,13 +68,12 @@ public class EmployeeService {
 	}
 	
 	// 查詢單筆
-	public DepartmentDTO getDepartmentById(Long id) {
-		Optional<Department> departmentOpt = departmentRepository.findById(id);
-		if(departmentOpt.isPresent()) {
-			Department department = departmentOpt.get();
-			// department 轉 departmentDTO
-			DepartmentDTO departmentDTO = modelMapper.map(department, DepartmentDTO.class);
-			return departmentDTO;
+	public EmployeeDTO getEmployeeById(Long id) {
+		Optional<Employee> employeetOpt = employeeRepository.findById(id);
+		if(employeetOpt.isPresent()) {
+			Employee employee = employeetOpt.get();
+			EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
+			return employeeDTO;
 		}
 		return null;
 	}

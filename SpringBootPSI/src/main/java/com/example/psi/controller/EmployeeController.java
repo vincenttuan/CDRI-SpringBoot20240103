@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.psi.model.dto.DepartmentDTO;
 import com.example.psi.model.dto.EmployeeDTO;
 import com.example.psi.model.dto.EmployeePageDTO;
+import com.example.psi.model.po.Employee;
 import com.example.psi.service.DepartmentService;
 import com.example.psi.service.EmployeeService;
 
@@ -49,28 +50,27 @@ public class EmployeeController {
 	
 	@PostMapping("/")
 	public String create(EmployeeDTO employeeDTO) {
-		employeeRepository.save(employee);
+		employeeService.add(employeeDTO);
 		return "redirect:/employee/";
 	}
 	
 	@GetMapping("/edit/{id}") // 修改頁面的呈現
 	public String edit(@PathVariable("id") Long id, Model model) {
-		Employee employee = employeeRepository.findById(id).get();
-		model.addAttribute("employee", employee);
-		model.addAttribute("departments", departmentRepository.findAll());
+		EmployeeDTO employeeDTO = employeeService.getEmployeeById(id);
+		model.addAttribute("employee", employeeDTO);
+		model.addAttribute("departments", departmentService.findAll());
 		return "employee-edit";
 	}
 	
 	@PutMapping("/{id}")
-	public String update(@PathVariable("id") Long id, Employee employee) {
-		employee.setId(id);
-		employeeRepository.save(employee);
+	public String update(@PathVariable("id") Long id, EmployeeDTO employeeDTO) {
+		employeeService.update(employeeDTO, id);
 		return "redirect:/employee/";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Long id) {
-		employeeRepository.deleteById(id);
+		employeeService.delete(id);
 		return "redirect:/employee/";
 	}
 }
