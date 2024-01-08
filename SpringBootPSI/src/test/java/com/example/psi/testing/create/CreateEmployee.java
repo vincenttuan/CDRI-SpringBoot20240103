@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.psi.model.dto.DepartmentDTO;
 import com.example.psi.model.dto.EmployeeDTO;
-import com.example.psi.model.po.Department;
-import com.example.psi.service.DepartmentService;
 import com.example.psi.service.EmployeeService;
 
 @SpringBootTest

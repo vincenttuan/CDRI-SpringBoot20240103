@@ -43,7 +43,4 @@ public class EmployeeController {
 		model.addAttribute("employeePageDTO", employeePageDTO);
 		return "employee";
 	}
-	
-	
-	
 }

@@ -11,7 +11,6 @@ import com.example.psi.model.po.Department;
 import com.example.psi.repository.DepartmentRepository;
 import com.example.psi.service.DepartmentService;
 
-import jakarta.persistence.FetchType;
 import jakarta.transaction.Transactional;
 
 @SpringBootTest

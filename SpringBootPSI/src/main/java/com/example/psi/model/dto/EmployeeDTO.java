@@ -1,10 +1,5 @@
 package com.example.psi.model.dto;
 
-import com.example.psi.model.po.Department;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
