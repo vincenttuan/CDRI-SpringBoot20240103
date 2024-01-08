@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +25,13 @@ public class DepartmentController {
 	public String index(@ModelAttribute DepartmentDTO departmentDTO, Model model) {
 		List<DepartmentDTO> departments = departmentService.findAll();
 		model.addAttribute("departments", departments);
+		return "department";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Long id, Model model) {
+		DepartmentDTO departmentDTO = departmentService.getDepartmentById(id);
+		model.addAttribute("", departmentDTO)
 		return "department";
 	}
 	
