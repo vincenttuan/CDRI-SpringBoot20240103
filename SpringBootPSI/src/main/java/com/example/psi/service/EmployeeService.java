@@ -1,9 +1,12 @@
 package com.example.psi.service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.psi.model.dto.DepartmentDTO;
 import com.example.psi.model.dto.EmployeeDTO;
 import com.example.psi.model.po.Department;
 import com.example.psi.model.po.Employee;
@@ -36,6 +39,12 @@ public class EmployeeService {
 		employeeRepository.save(employee);
 	}
 	
-	
+	// 全部查詢
+	public List<EmployeeDTO> findAll() {
+		List<Employee> employees = employeeRepository.findAll();
+		return employees.stream()
+						  .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
+						  .toList();
+	}
 	
 }
