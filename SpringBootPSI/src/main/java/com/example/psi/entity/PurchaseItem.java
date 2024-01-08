@@ -9,10 +9,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "purchase_item")
-@Data
+@Getter
+@Setter
 public class PurchaseItem {
 	
 	@Id
@@ -29,4 +32,11 @@ public class PurchaseItem {
 	@JoinColumn(name = "product_id")
 	@ManyToOne
 	private Product product;
+
+	@Override
+	public String toString() {
+		return "PurchaseItem [id=" + id + ", amount=" + amount + ", purchase=" + purchase + ", product=" + product
+				+ "]";
+	}
+	
 }

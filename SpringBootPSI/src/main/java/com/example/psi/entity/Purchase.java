@@ -19,10 +19,13 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "purchase")
-@Data
+@Getter
+@Setter
 public class Purchase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +47,11 @@ public class Purchase {
 	@OneToMany(mappedBy = "purchase")
 	@OrderBy("id ASC")
 	private Set<PurchaseItem> purchaseItems = new LinkedHashSet<>();
+
+	@Override
+	public String toString() {
+		return "Purchase [id=" + id + ", date=" + date + ", supplier=" + supplier + ", employee=" + employee + "]";
+	}
 	
 	
 }

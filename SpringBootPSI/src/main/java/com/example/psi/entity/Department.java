@@ -12,6 +12,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * DTO (Data Transfer Object，數據傳輸對象）是一個用於封裝數據並在應用程序的不同層之間傳輸數據的模式。
@@ -38,7 +40,8 @@ import lombok.Data;
 
 @Entity // PO (Persistent Object): 持久對象是一種在資料庫中有對應記錄的對象。
 @Table(name = "department")
-@Data
+@Getter
+@Setter
 public class Department {
 	// @Id: 主鍵, POID (Persistent Object Identifier): 持久對象標識符是一個唯一標識 PO 的值，通常對應於資料庫表中的主鍵。
 	// @GeneratedValue: 自動產生值
@@ -63,5 +66,10 @@ public class Department {
 	@OneToMany(mappedBy = "department")
 	@OrderBy("id ASC")
 	private Set<Employee> emplopyees = new LinkedHashSet<>();
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", name=" + name + "]";
+	}
 	
 }

@@ -14,10 +14,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "employee")
-@Data
+@Getter
+@Setter
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +40,10 @@ public class Employee {
 	@OneToMany(mappedBy = "employee")
 	@OrderBy("id ASC")
 	private Set<Order> orders = new LinkedHashSet<>();
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", department=" + department + "]";
+	}
 	
 }

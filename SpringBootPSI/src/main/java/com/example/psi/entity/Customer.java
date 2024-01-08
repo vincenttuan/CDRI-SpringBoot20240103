@@ -12,10 +12,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "customer")
-@Data
+@Getter
+@Setter
 public class Customer {
 	
 	@Id
@@ -28,4 +31,11 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
 	@OrderBy("id ASC")
 	private Set<Order> orders = new LinkedHashSet<>();
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + "]";
+	}
+	
+	
 }

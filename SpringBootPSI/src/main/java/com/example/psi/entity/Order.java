@@ -19,10 +19,13 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "orders") // 因為 MySQL 不可以建立 Order 資料表 (因 Order 在 MySQL 中是保留字)
-@Data
+@Getter
+@Setter
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +46,12 @@ public class Order {
 	
 	@JoinColumn(name = "employee_id")
 	@ManyToOne
-	private Employee employee; 
+	private Employee employee;
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", date=" + date + ", customer=" + customer + ", employee=" + employee + "]";
+	} 
+	
 	
 }	
