@@ -3,6 +3,7 @@ package com.example.psi;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @Configuration
 public class MyConfig {
@@ -12,4 +13,9 @@ public class MyConfig {
 		return new ModelMapper();
 	}
 	
+	@Bean
+	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+		HiddenHttpMethodFilter filter = new HiddenHttpMethodFilter();
+		return filter;
+	}
 }
