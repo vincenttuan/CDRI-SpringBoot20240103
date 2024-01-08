@@ -1,4 +1,4 @@
-package com.example.psi.entity;
+package com.example.psi.model.po;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -16,34 +16,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "product")
+@Table(name = "customer")
 @Getter
 @Setter
-public class Product {
+public class Customer {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; // 商品序號
+	private Long id; // 客戶序號
 	
 	@Column
-	private String name; // 商品名稱
+	private String name; // 客戶姓名
 	
-	@Column
-	private Integer cost; // 商品成本
-	
-	@Column
-	private Integer price; // 商品定價
-	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "customer")
 	@OrderBy("id ASC")
-	private Set<PurchaseItem> purchaseItems = new LinkedHashSet<>();
-	
-	@OneToMany(mappedBy = "product")
-	@OrderBy("id ASC")
-	private Set<OrderItem> orderItems = new LinkedHashSet<>();
+	private Set<Order> orders = new LinkedHashSet<>();
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", cost=" + cost + ", price=" + price + "]";
+		return "Customer [id=" + id + ", name=" + name + "]";
 	}
+	
 	
 }
