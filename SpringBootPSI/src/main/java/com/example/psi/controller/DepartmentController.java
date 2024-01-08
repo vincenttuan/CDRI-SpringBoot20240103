@@ -32,7 +32,7 @@ public class DepartmentController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		DepartmentDTO departmentDTO = departmentService.getDepartmentById(id);
-		model.addAttribute("departmentDTO", departmentDTO);
+		model.addAttribute("department", departmentDTO);
 		return "department-edit";
 	}
 	
