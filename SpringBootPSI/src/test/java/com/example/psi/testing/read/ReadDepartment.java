@@ -21,17 +21,20 @@ public class ReadDepartment {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 	
-	//@Test
+	@Transactional
+	@Test
 	public void readOne() {
+		System.out.println("readOne:");
 		DepartmentDTO departmentDTO = departmentService.getDepartmentById(1L);
 		System.out.println("id: " + departmentDTO.getId());
 		System.out.println("name: " + departmentDTO.getName());
 		System.out.println("employee size: " + departmentDTO.getEmployees().size());
 	}
 	
-	@Transactional // 在測試的時候若 fetch = FetchType.LAZY, 要加上 @Transactional
-	@Test
+	//@Transactional // 在測試的時候若 fetch = FetchType.LAZY, 要加上 @Transactional
+	//@Test
 	public void readOne2() {
+		System.out.println("readOne2:");
 		Department department = departmentRepository.findById(1L).get();
 		System.out.println("id: " + department.getId());
 		System.out.println("name: " + department.getName());
