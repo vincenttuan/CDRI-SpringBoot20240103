@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.psi.model.dto.DepartmentDTO;
@@ -24,6 +25,12 @@ public class DepartmentController {
 		List<DepartmentDTO> departments = departmentService.findAll();
 		model.addAttribute("departments", departments);
 		return "department";
+	}
+	
+	@PostMapping("/")
+	public String add(DepartmentDTO departmentDTO) {
+		departmentService.add(departmentDTO);
+		return "redirect:/psi/department/";
 	}
 	
 }
