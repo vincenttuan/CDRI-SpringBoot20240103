@@ -50,6 +50,16 @@ public class CreateEmployee {
 		emp10.setName("鄭十");
 		
 		// 儲存
+		employeeService.add(emp1, 1L);
+		employeeService.add(emp2, 2L);
+		employeeService.add(emp3, 2L);
+		employeeService.add(emp4, 3L);
+		employeeService.add(emp5, 3L);
+		employeeService.add(emp6, 3L);
+		employeeService.add(emp7, 1L);
+		employeeService.add(emp8, 2L);
+		employeeService.add(emp9, 3L);
+		employeeService.add(emp10, 3L);
 		
 		System.out.println("Save OK !");
 	}
