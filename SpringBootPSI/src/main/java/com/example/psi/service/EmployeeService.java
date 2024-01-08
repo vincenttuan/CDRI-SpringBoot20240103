@@ -43,16 +43,18 @@ public class EmployeeService {
 	public List<EmployeeDTO> findAll() {
 		List<Employee> employees = employeeRepository.findAll();
 		return employees.stream()
-						  //.map(employee -> modelMapper.map(employee, EmployeeDTO.class))
+						  .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
+						  /*
 						  .map(employee -> {
 							  EmployeeDTO employeeDTO = new EmployeeDTO();
 							  employeeDTO.setId(employee.getId());
 							  employeeDTO.setName(employee.getName());
 							  
 							  DepartmentDTO departmentDTO = modelMapper.map(employee.getDepartment(), DepartmentDTO.class);
-							  employeeDTO.setDepartmentDTO(departmentDTO);
+							  employeeDTO.setDepartment(departmentDTO);
 							  return employeeDTO;
 						  })
+						  */
 						  .toList();
 	}
 	

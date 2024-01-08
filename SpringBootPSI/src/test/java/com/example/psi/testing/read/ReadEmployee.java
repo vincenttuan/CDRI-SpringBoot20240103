@@ -33,7 +33,7 @@ public class ReadEmployee {
 		for(EmployeeDTO employeeDTO : employeeDTOs) {
 			System.out.println("id: " + employeeDTO.getId());
 			System.out.println("name: " + employeeDTO.getName());
-			System.out.println("department: " + employeeDTO.getDepartmentDTO());
+			System.out.println("department: " + employeeDTO.getDepartment());
 		}
 	}
 	
