@@ -1,5 +1,6 @@
 package com.example.psi.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -34,6 +35,12 @@ public class DepartmentService {
 			return departmentDTO;
 		}
 		return null;
+	}
+	
+	public DepartmentDTO[] findAll() {
+		List<Department> departments = departmentRepository.findAll();
+		DepartmentDTO[] departmentDTOs = modelMapper.map(departments, DepartmentDTO[].class);
+		return departmentDTOs;
 	}
 	
 }
