@@ -16,7 +16,7 @@ public class DepartmentService {
 	public void add(DepartmentDTO departmentDTO) {
 		// 將 departmentDTO 轉 department
 		Department department = new Department();
-		department.setName(department.getName());
+		department.setName(departmentDTO.getName());
 		departmentRepository.save(department);
 	}
 	
