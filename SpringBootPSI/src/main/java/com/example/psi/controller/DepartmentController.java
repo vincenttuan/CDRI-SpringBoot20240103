@@ -36,6 +36,12 @@ public class DepartmentController {
 		return "department-edit";
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		departmentService.delete(id);
+		return "redirect:/department/";
+	}
+	
 	@PostMapping("/")
 	public String add(DepartmentDTO departmentDTO) {
 		departmentService.add(departmentDTO);
