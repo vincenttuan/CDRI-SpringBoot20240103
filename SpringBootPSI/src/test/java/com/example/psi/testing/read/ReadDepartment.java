@@ -43,8 +43,8 @@ public class ReadDepartment {
 		System.out.println("employee size: " + department.getEmployees().size());
 	}
 	
-	//@Transactional
-	//@Test
+	@Transactional
+	@Test
 	public void readAll() {
 		System.out.println("readAll:");
 		List<DepartmentDTO> departmentDTOs = departmentService.findAll();
@@ -55,8 +55,8 @@ public class ReadDepartment {
 		}
 	}
 	
-	@Transactional
-	@Test
+	//@Transactional
+	//@Test
 	public void readAll2() {
 		System.out.println("readAll2:");
 		List<Department> departments = departmentRepository.findAll();
