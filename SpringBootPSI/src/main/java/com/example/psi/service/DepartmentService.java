@@ -1,5 +1,7 @@
 package com.example.psi.service;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,17 @@ public class DepartmentService {
 		// 將 departmentDTO 轉 department
 		Department department = modelMapper.map(departmentDTO, Department.class);
 		departmentRepository.save(department);
+	}
+	
+	public DepartmentDTO getDepartmentById(Long id) {
+		Optional<Department> departmentOpt = departmentRepository.findById(id);
+		if(departmentOpt.isPresent()) {
+			Department department = departmentOpt.get();
+			// department 轉 departmentDTO
+			DepartmentDTO departmentDTO = modelMapper.map(department, DepartmentDTO.class);
+			return departmentDTO;
+		}
+		return null;
 	}
 	
 }
