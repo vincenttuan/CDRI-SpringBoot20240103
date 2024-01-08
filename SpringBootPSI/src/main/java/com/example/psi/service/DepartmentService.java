@@ -32,6 +32,12 @@ public class DepartmentService {
 		departmentRepository.save(department);
 	}
 	
+	public void update(DepartmentDTO departmentDTO) {
+		// 將 departmentDTO 轉 department
+		Department department = modelMapper.map(departmentDTO, Department.class);
+		departmentRepository.save(department);
+	}
+	
 	public DepartmentDTO getDepartmentById(Long id) {
 		Optional<Department> departmentOpt = departmentRepository.findById(id);
 		if(departmentOpt.isPresent()) {
