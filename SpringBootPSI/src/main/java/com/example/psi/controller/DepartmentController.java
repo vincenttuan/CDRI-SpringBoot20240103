@@ -30,7 +30,7 @@ public class DepartmentController {
 	@PostMapping("/")
 	public String add(DepartmentDTO departmentDTO) {
 		departmentService.add(departmentDTO);
-		return "redirect:/psi/department/";
+		return "redirect:/department/";
 	}
 	
 }
