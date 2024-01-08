@@ -21,8 +21,8 @@ public class ReadDepartment {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 	
-	@Transactional
-	@Test
+	//@Transactional
+	//@Test
 	public void readOne() {
 		System.out.println("readOne:");
 		DepartmentDTO departmentDTO = departmentService.getDepartmentById(1L);
@@ -39,5 +39,16 @@ public class ReadDepartment {
 		System.out.println("id: " + department.getId());
 		System.out.println("name: " + department.getName());
 		System.out.println("employee size: " + department.getEmployees().size());
+	}
+	
+	@Test
+	public void readAll() {
+		System.out.println("readAll:");
+		DepartmentDTO[] departmentDTOs = departmentService.findAll();
+		for(DepartmentDTO departmentDTO : departmentDTOs) {
+			System.out.println("id: " + departmentDTO.getId());
+			System.out.println("name: " + departmentDTO.getName());
+			System.out.println("employee size: " + departmentDTO.getEmployees().size());
+		}
 	}
 }
