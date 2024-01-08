@@ -41,9 +41,6 @@ public class Employee {
 	@OrderBy("id ASC")
 	private Set<Order> orders = new LinkedHashSet<>();
 
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", department=" + department + "]";
-	}
+	
 	
 }

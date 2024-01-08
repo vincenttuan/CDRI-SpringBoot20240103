@@ -5,6 +5,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -63,13 +64,10 @@ public class Department {
 	// fetch = FetchType.EAGER 表示預設會主動查詢該部門的員工(不論是否會用都會先查好)
 	// orphanRemoval = true 表示如果該部門下所有 Employee 被刪除, 則此部門也會被刪除(在此不適用)
 	// orphanRemoval = false (預設)表示如果該部門下所有 Employee 被刪除, 則此部門並不會被刪除
-	@OneToMany(mappedBy = "department")
+	@OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
 	@OrderBy("id ASC")
-	private Set<Employee> emplopyees = new LinkedHashSet<>();
+	private Set<Employee> employees = new LinkedHashSet<>();
 
-	@Override
-	public String toString() {
-		return "Department [id=" + id + ", name=" + name + "]";
-	}
+	
 	
 }
