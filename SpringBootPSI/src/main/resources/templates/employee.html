@@ -15,7 +15,7 @@
 		<form action="#" th:action="@{/employee/}" th:object="${employeeDTO}" method="post">
 			<div class="form-group">
 				<label>部門名稱:</label>
-				<select class="form-control select2" th:field="*{departmentDTO.id}" id="departmentDTO.id">
+				<select class="form-control select2" th:field="*{department.id}" id="department.id">
 					<option th:each="d:${departments}" th:value="${d.id}" th:text="${d.name}"></option>
 				</select>
 			</div>
