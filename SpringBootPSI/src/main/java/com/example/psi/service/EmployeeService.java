@@ -1,5 +1,6 @@
 package com.example.psi.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +18,19 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	public void add(EmployeeDTO employeeDTO) {
 		// employeeDTO 轉 employee
-		Employee employee = new Employee();
-		employee.setName(employeeDTO.getName());
-		Department department = departmentRepository.findById(employeeDTO.getDepartmentDTO().getId()).get();
-		employee.setDepartment(department);
+		Employee employee = modelMapper.map(employeeDTO, Employee.class);
 		employeeRepository.save(employee);
 	}
 	
 	public void add(EmployeeDTO employeeDTO, Long departmentId) {
 		// employeeDTO 轉 employee
-		Employee employee = new Employee();
-		employee.setName(employeeDTO.getName());
+		Employee employee = modelMapper.map(employeeDTO, Employee.class);
+		// 根據指定 departmentId 注入 department 物件
 		Department department = departmentRepository.findById(departmentId).get();
 		employee.setDepartment(department);
 		employeeRepository.save(employee);
