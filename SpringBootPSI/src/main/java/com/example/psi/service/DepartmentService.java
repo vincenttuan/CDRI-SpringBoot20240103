@@ -26,12 +26,14 @@ public class DepartmentService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	// 新增
 	public void add(DepartmentDTO departmentDTO) {
 		// 將 departmentDTO 轉 department
 		Department department = modelMapper.map(departmentDTO, Department.class);
 		departmentRepository.save(department);
 	}
 	
+	// 修改
 	public void update(DepartmentDTO departmentDTO, Long id) {
 		Optional<Department> departmentOpt = departmentRepository.findById(id);
 		if(departmentOpt.isPresent()) {
@@ -41,6 +43,15 @@ public class DepartmentService {
 		} 
 	}
 	
+	// 刪除
+	public void delete(Long id) {
+		Optional<Department> departmentOpt = departmentRepository.findById(id);
+		if(departmentOpt.isPresent()) {
+			departmentRepository.delete(departmentOpt.get());
+		} 
+	}
+	
+	// 查詢單筆
 	public DepartmentDTO getDepartmentById(Long id) {
 		Optional<Department> departmentOpt = departmentRepository.findById(id);
 		if(departmentOpt.isPresent()) {
@@ -52,6 +63,7 @@ public class DepartmentService {
 		return null;
 	}
 	
+	// 全部查詢
 	public List<DepartmentDTO> findAll() {
 		List<Department> departments = departmentRepository.findAll();
 		return departments.stream()
