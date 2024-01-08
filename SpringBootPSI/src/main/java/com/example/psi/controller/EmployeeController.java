@@ -37,8 +37,8 @@ public class EmployeeController {
 	// 例如: page=1&size=5 第 2 頁每頁 5 筆
 	// 例如: page=2&size=5 第 3 頁每頁 5 筆
 	@GetMapping("/")
-	public String index(@RequestParam(defaultValue = "0") int page, 
-						@RequestParam(defaultValue = "3") int size,
+	public String index(@RequestParam(name = "page", defaultValue = "0") int page, 
+						@RequestParam(name = "size", defaultValue = "3") int size,
 						@ModelAttribute EmployeeDTO employeeDTO, Model model) {
 		Pageable pageable = PageRequest.of(page, size);
 		List<DepartmentDTO> departments = departmentService.findAll();
