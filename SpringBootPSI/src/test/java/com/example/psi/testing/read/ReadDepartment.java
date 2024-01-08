@@ -43,14 +43,27 @@ public class ReadDepartment {
 		System.out.println("employee size: " + department.getEmployees().size());
 	}
 	
-	@Test
+	//@Transactional
+	//@Test
 	public void readAll() {
 		System.out.println("readAll:");
 		List<DepartmentDTO> departmentDTOs = departmentService.findAll();
 		for(DepartmentDTO departmentDTO : departmentDTOs) {
 			System.out.println("id: " + departmentDTO.getId());
 			System.out.println("name: " + departmentDTO.getName());
-			System.out.println("employee size: " + departmentDTO.getEmployees().size());
+			//System.out.println("employee size: " + departmentDTO.getEmployees().size());
+		}
+	}
+	
+	@Transactional
+	@Test
+	public void readAll2() {
+		System.out.println("readAll2:");
+		List<Department> departments = departmentRepository.findAll();
+		for(Department department : departments) {
+			System.out.println("id: " + department.getId());
+			System.out.println("name: " + department.getName());
+			//System.out.println("employee size: " + departmentDTO.getEmployees().size());
 		}
 	}
 }

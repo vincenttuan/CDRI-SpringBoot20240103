@@ -11,6 +11,8 @@ import com.example.psi.model.dto.DepartmentDTO;
 import com.example.psi.model.po.Department;
 import com.example.psi.repository.DepartmentRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class DepartmentService {
 	
