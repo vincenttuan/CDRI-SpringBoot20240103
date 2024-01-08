@@ -27,7 +27,9 @@ public class EmployeeController {
 	@GetMapping("/")
 	public String index(@ModelAttribute EmployeeDTO employeeDTO, Model model) {
 		List<DepartmentDTO> departments = departmentService.findAll();
+		List<EmployeeDTO> employees = employeeService.findAll();
 		model.addAttribute("departments", departments);
+		model.addAttribute("employees", employees);
 		return "employee";
 	}
 	
