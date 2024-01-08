@@ -16,6 +16,7 @@ public class ReadDepartment {
 	@Test
 	public void readOne() {
 		DepartmentDTO departmentDTO = departmentService.getDepartmentById(1L);
-		System.out.println(departmentDTO);
+		System.out.println(departmentDTO.getId());
+		System.out.println(departmentDTO.getName());
 	}
 }
