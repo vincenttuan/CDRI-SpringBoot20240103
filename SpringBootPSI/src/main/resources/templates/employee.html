@@ -12,10 +12,10 @@
 		<div th:include="header :: header"></div>
 		<!-- Content -->
 		<h1>新增員工</h1>
-		<form action="#" th:action="@{/employee/}" th:object="${employee}" method="post">
+		<form action="#" th:action="@{/employee/}" th:object="${employeeDTO}" method="post">
 			<div class="form-group">
 				<label>部門名稱:</label>
-				<select class="form-control select2" th:field="*{department.id}" id="department.id">
+				<select class="form-control select2" th:field="*{departmentDTO.id}" id="departmentDTO.id">
 					<option th:each="d:${departments}" th:value="${d.id}" th:text="${d.name}"></option>
 				</select>
 			</div>
@@ -42,8 +42,8 @@
 					<td th:text="${emp.id}"></td>
 					<td th:text="${emp.name}"></td>
 					<td>
-						<a th:href="@{/department/edit/{id}(id=${emp.department.id})}">
-							<span th:text="${emp.department.name}" class="btn btn-success"></span>
+						<a th:href="@{/department/edit/{id}(id=${emp.departmentDTO.id})}">
+							<span th:text="${emp.departmentDTO.name}" class="btn btn-success"></span>
 						</a>
 					</td>
 					<td><a th:href="@{/employee/edit/{id}(id=${emp.id})}" class="btn btn-primary">編輯</a></td>
