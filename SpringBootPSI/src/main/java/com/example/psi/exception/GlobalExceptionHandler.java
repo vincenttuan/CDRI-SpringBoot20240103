@@ -1,8 +1,15 @@
 package com.example.psi.exception;
 
+import java.beans.PropertyEditorSupport;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 
 // Controller 全局 AOP 
 /**
@@ -23,6 +30,30 @@ public class GlobalExceptionHandler {
     public String handleException(Exception ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());
         return "error";
+    }
+    
+    /**
+     * 當控制器收到含有日期的請求時（例如表單提交），Spring 會使用這個編輯器自動將字符串日期轉換為 Date 對象。
+     * 就可以在控制器方法中直接使用 Date 類型的參數，而不需要自行解析日期字符串。
+     * */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                try {
+                    setValue(dateFormat.parse(text));
+                } catch (ParseException e) {
+                    setValue(null);
+                }
+            }
+            
+            @Override
+            public String getAsText() {
+                return dateFormat.format((Date) getValue());
+            }
+        });
     }
 
     // 您可以添加更多的異常處理方法來處理不同類型的異常
