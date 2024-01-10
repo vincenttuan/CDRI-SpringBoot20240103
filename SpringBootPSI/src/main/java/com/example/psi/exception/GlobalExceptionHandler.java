@@ -1,6 +1,7 @@
 package com.example.psi.exception;
 
 import java.beans.PropertyEditorSupport;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 // Controller 全局 AOP 
 /**
@@ -26,9 +28,21 @@ import org.springframework.web.bind.annotation.InitBinder;
 public class GlobalExceptionHandler {
 
     // 捕捉所有類型的 Exception
+    @ExceptionHandler(NoResourceFoundException.class)
+    public String handleNoResourceFoundException(NoResourceFoundException ex, Model model) {
+        model.addAttribute("errorMessage", "無此網頁");
+        return "error";
+    }
+    
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public String handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex, Model model) {
+        model.addAttribute("errorMessage", "名稱重複");
+        return "error";
+    }
+    
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex, Model model) {
-        model.addAttribute("errorMessage", ex.getMessage());
+        model.addAttribute("errorMessage", "其他錯誤:" + ex);
         return "error";
     }
     
@@ -36,7 +50,7 @@ public class GlobalExceptionHandler {
      * 當控制器收到含有日期的請求時（例如表單提交），Spring 會使用這個編輯器自動將字符串日期轉換為 Date 對象。
      * 就可以在控制器方法中直接使用 Date 類型的參數，而不需要自行解析日期字符串。
      * */
-    @InitBinder
+    //@InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
