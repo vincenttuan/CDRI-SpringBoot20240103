@@ -22,12 +22,12 @@
 				<th>採購總價</th>
 			</tr>
 			<tr>
-				<td th:text="${purchase.id}"></td>
-				<td th:text="${purchase.date}"></td>
-				<td th:text="${purchase.supplier.name}"></td>
-				<td th:text="${purchase.employee.name}"></td>
-				<td th:text="${#lists.size(purchase.purchaseItems)}"></td>
-				<td th:text="${purchase.total}"></td>
+				<td th:text="${purchaseDto.id}"></td>
+				<td th:text="${purchaseDto.date}"></td>
+				<td th:text="${purchaseDto.supplier.name}"></td>
+				<td th:text="${purchaseDto.employee.name}"></td>
+				<td th:text="${#lists.size(purchaseDto.purchaseItems)}"></td>
+				<td th:text="${purchaseDto.total}"></td>
 			</tr>
 		</table>
 		
@@ -42,24 +42,24 @@
 				<th>編輯</th>
 				<th>刪除</th>
 			</tr>
-			<tr th:each="item : ${purchase.purchaseItems}">
+			<tr th:each="item : ${purchaseDto.purchaseItems}">
 				<td th:text="${item.id}"></td>
 				<td th:text="${item.product.name}"></td>
 				<td th:text="${item.product.cost}"></td>
 				<td th:text="${item.amount}"></td>
 				<td th:text="${item.amount * item.product.cost}"></td>
-				<td><a th:href="@{/purchase/edit/{pid}/item/{iid}(pid=${purchase.id}, iid=${item.id})}" class="btn btn-primary">編輯</a></td>
-				<td><a th:href="@{/purchase/delete/{pid}/item/{iid}(pid=${purchase.id}, iid=${item.id})}" class="btn btn-danger">刪除</a></td>
+				<td><a th:href="@{/purchase/edit/{pid}/item/{iid}(pid=${purchaseDto.id}, iid=${item.id})}" class="btn btn-primary">編輯</a></td>
+				<td><a th:href="@{/purchase/delete/{pid}/item/{iid}(pid=${purchaseDto.id}, iid=${item.id})}" class="btn btn-danger">刪除</a></td>
 			</tr>
 			<tr>
 				<td colspan="3"> </td>
 				<td>總計</td>
-				<td th:text="${purchase.total}"></td>
+				<td th:text="${purchaseDto.total}"></td>
 				<td> </td>
 			</tr>
 		</table>
 		
-		<form action="#" th:action="@{/purchase/{pid}/item(pid=${purchase.id})}" th:object="${purchaseItem}" method="post">
+		<form action="#" th:action="@{/purchase/{pid}/item(pid=${purchaseDto.id})}" th:object="${purchaseItemDto}" method="post">
 			<!-- h1 標籤要放到 form 表單中, 才可以抓到 *{id} -->
 			<h1 th:text="(*{id} == null ? '新增採購單項目' : '修改採購單項目')" >新增採購明細單</h1>
 			<input type="hidden" name="_method" th:value="(*{id} == null ? 'POST' : 'PUT')" value="POST" />
@@ -73,7 +73,7 @@
 			<div class="form-group">
 				<label>商品名稱:</label>
 				<select class="form-control select2" th:field="*{product.id}" id="product.id">
-					<option th:each="prod:${products}" th:value="${prod.id}" th:text="${prod.name}"></option>
+					<option th:each="prod:${productDtos}" th:value="${prod.id}" th:text="${prod.name}"></option>
 				</select>
 			</div>
 			

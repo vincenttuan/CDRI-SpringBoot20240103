@@ -25,5 +25,14 @@ public class PurchaseDto {
 	private EmployeeDto employee;
 	
 	private Set<PurchaseItemDto> purchaseItems = new LinkedHashSet<>();
-
+	
+	// 計算採購單總價
+	public Integer getTotal() {
+		if(purchaseItems.size() == 0) {
+			return 0;
+		}
+		return purchaseItems.stream()
+				.mapToInt(item -> item.getAmount() * item.getProduct().getCost())
+				.sum();
+	}
 }
