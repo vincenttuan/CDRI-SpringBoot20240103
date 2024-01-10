@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.psi.model.dto.CustomerDto;
 import com.example.psi.model.dto.EmployeeDto;
@@ -116,7 +117,7 @@ public class OrderController {
 	
 	@GetMapping("/edit/{oid}/item/{iid}") // 項目修改頁面的呈現
 	public String editItem(@PathVariable("oid") Long oid, @PathVariable("iid") Long iid, Model model) {
-		OrderDto orderDto = orderService.getOrderById(iid);
+		OrderDto orderDto = orderService.getOrderById(oid);
 		OrderItemDto orderItemDto = orderService.getOrderItemById(iid);
 		List<ProductDto> productDtos = productService.findAll();
 		model.addAttribute("orderDto", orderDto);

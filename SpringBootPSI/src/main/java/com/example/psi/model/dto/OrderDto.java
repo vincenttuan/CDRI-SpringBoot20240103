@@ -22,4 +22,14 @@ private Long id; // 訂單序號
 	private CustomerDto customer;
 	private Set<OrderItemDto> orderItems = new LinkedHashSet<>();
 	private EmployeeDto employee;
+	
+	// 計算訂單總價
+	public Integer getTotal() {
+		if(orderItems.size() == 0) {
+			return 0;
+		}
+		return orderItems.stream()
+				.mapToInt(item -> item.getAmount() * item.getProduct().getPrice())
+				.sum();
+	}
 }

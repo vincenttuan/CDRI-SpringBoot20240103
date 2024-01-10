@@ -9,7 +9,7 @@
 <body>
 	<div class="container my-2">
 		<!-- Header -->
-		<div th:include="header :: header"></div>
+		<div th:insert="header :: header"></div>
 		<!-- Content -->
 		<h1>新增訂單</h1>
 		<form action="#" th:action="@{/order/}" th:object="${orderDto}" method="post">
@@ -65,7 +65,7 @@
 			</tbody>
 		</table>
 		<!-- Footer -->
-		<div th:include="footer :: footer"></div>
+		<div th:insert="footer :: footer"></div>
 	</div>
 </body>
 </html>
