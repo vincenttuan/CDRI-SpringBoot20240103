@@ -12,7 +12,7 @@
 		<div th:include="header :: header"></div>
 		<!-- Content -->
 		<h1>新增訂單</h1>
-		<form action="#" th:action="@{/order/}" th:object="${order}" method="post">
+		<form action="#" th:action="@{/order/}" th:object="${orderDto}" method="post">
 			<div class="form-group">
 				<label>訂單日期:</label>
 				<input type="date" 
@@ -23,14 +23,14 @@
 			<div class="form-group">
 				<label>客戶名稱:</label>
 				<select class="form-control select2" th:field="*{customer.id}" id="customer.id">
-					<option th:each="cust:${customers}" th:value="${cust.id}" th:text="${cust.name}"></option>
+					<option th:each="cust:${customerDtos}" th:value="${cust.id}" th:text="${cust.name}"></option>
 				</select>
 			</div>
 			
 			<div class="form-group">
 				<label>員工姓名:</label>
 				<select class="form-control select2" th:field="*{employee.id}" id="employee.id">
-					<option th:each="emp:${employees}" th:value="${emp.id}" th:text="${emp.name}"></option>
+					<option th:each="emp:${employeeDtos}" th:value="${emp.id}" th:text="${emp.name}"></option>
 				</select>
 			</div>
 			
@@ -52,7 +52,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="ord : ${orders}">
+				<tr th:each="ord : ${orderDtos}">
 					<td th:text="${ord.id}"></td>
 					<td th:text="${ord.date}"></td>
 					<td th:text="${ord.customer.name}"></td>
