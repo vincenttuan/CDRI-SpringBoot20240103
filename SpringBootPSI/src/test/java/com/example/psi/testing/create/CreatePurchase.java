@@ -2,7 +2,6 @@ package com.example.psi.testing.create;
 
 import java.util.Date;
 
-import org.hibernate.annotations.Comment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import com.example.psi.model.dto.ProductDto;
 import com.example.psi.model.dto.PurchaseDto;
 import com.example.psi.model.dto.PurchaseItemDto;
 import com.example.psi.model.dto.SupplierDto;
-import com.example.psi.model.po.Product;
 import com.example.psi.service.EmployeeService;
 import com.example.psi.service.ProductService;
 import com.example.psi.service.PurchaseService;
