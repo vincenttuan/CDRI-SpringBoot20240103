@@ -7,10 +7,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.psi.model.dto.EmployeeDto;
 import com.example.psi.model.dto.PurchaseDto;
 import com.example.psi.model.dto.PurchaseItemDto;
+import com.example.psi.model.dto.SupplierDto;
+import com.example.psi.model.po.Employee;
 import com.example.psi.model.po.Purchase;
 import com.example.psi.model.po.PurchaseItem;
+import com.example.psi.model.po.Supplier;
 import com.example.psi.repository.PurchaseItemRepository;
 import com.example.psi.repository.PurchaseRepository;
 
@@ -38,8 +42,15 @@ public class PurchaseService {
 		if(purchaseOpt.isPresent()) {
 			Purchase purchase = purchaseOpt.get();
 			purchase.setDate(purchaseDto.getDate());
-			purchase.setEmployee(purchase.getEmployee());
-			purchase.setSupplier(purchaseDto.getSupplier());
+			
+			EmployeeDto employeeDto = purchaseDto.getEmployee();
+			Employee employee = modelMapper.map(employeeDto, Employee.class);
+			purchase.setEmployee(employee);
+			
+			SupplierDto supplierDto = purchaseDto.getSupplier();
+			Supplier supplier = modelMapper.map(supplierDto, Supplier.class);
+			purchase.setSupplier(supplier);
+			
 			purchaseRepository.save(purchase);
 		} 
 	}

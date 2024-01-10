@@ -32,7 +32,7 @@ public class PurchaseItem {
 	
 	@JoinColumn(name = "product_id")
 	@ManyToOne
-	private ProductDto product;
+	private Product product;
 
 	@Override
 	public String toString() {
