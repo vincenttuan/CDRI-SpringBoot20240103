@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.psi.model.dto.DepartmentDTO;
+import com.example.psi.model.dto.DepartmentDto;
 import com.example.psi.service.DepartmentService;
 
 @Controller
@@ -23,16 +23,17 @@ public class DepartmentController {
 	private DepartmentService departmentService;
 	
 	@GetMapping("/")
-	public String index(@ModelAttribute DepartmentDTO departmentDTO, Model model) {
-		List<DepartmentDTO> departments = departmentService.findAll();
-		model.addAttribute("departments", departments);
+	public String index(@ModelAttribute DepartmentDto departmentDto, Model model) {
+		List<DepartmentDto> departmentDtos = departmentService.findAll();
+		model.addAttribute("departmentDtos", departmentDtos);
+		model.addAttribute("departmentDto", departmentDto);
 		return "department";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
-		DepartmentDTO departmentDTO = departmentService.getDepartmentById(id);
-		model.addAttribute("departmentDTO", departmentDTO);
+		DepartmentDto departmentDto = departmentService.getDepartmentById(id);
+		model.addAttribute("departmentDto", departmentDto);
 		return "department-edit";
 	}
 	
@@ -43,14 +44,14 @@ public class DepartmentController {
 	}
 	
 	@PostMapping("/")
-	public String add(DepartmentDTO departmentDTO) {
-		departmentService.add(departmentDTO);
+	public String add(DepartmentDto departmentDto) {
+		departmentService.add(departmentDto);
 		return "redirect:/department/";
 	}
 	
 	@PutMapping("/{id}")
-	public String update(@PathVariable("id") Long id, DepartmentDTO departmentDTO) {
-		departmentService.update(departmentDTO, id);
+	public String update(@PathVariable("id") Long id, DepartmentDto departmentDto) {
+		departmentService.update(departmentDto, id);
 		return "redirect:/department/";
 	}
 	

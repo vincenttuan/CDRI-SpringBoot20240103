@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.example.psi.model.dto.EmployeeDTO;
-import com.example.psi.model.dto.EmployeePageDTO;
+import com.example.psi.model.dto.EmployeeDto;
+import com.example.psi.model.dto.EmployeePageDto;
 import com.example.psi.service.EmployeeService;
 
 import jakarta.transaction.Transactional;
@@ -26,8 +26,8 @@ public class ReadEmployee {
 	public void readAll() {
 		System.out.println("readOne:");
 		Pageable pageable = PageRequest.of(0, 3);
-		EmployeePageDTO employeePageDTO = employeeService.findAll(pageable); // 得到該分頁的數據實體
-		for(EmployeeDTO employeeDTO : employeePageDTO.getEmployees()) {
+		EmployeePageDto employeePageDTO = employeeService.findAll(pageable); // 得到該分頁的數據實體
+		for(EmployeeDto employeeDTO : employeePageDTO.getEmployees()) {
 			System.out.println("id: " + employeeDTO.getId());
 			System.out.println("name: " + employeeDTO.getName());
 			System.out.println("department: " + employeeDTO.getDepartment().getName());

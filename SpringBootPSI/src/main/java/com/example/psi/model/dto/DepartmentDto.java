@@ -17,12 +17,12 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-public class DepartmentDTO {
+public class DepartmentDto {
 	// 欄位資料
 	private Long id;
 	private String name;
 	// 關聯資料
-	private Set<EmployeeDTO> employees = new LinkedHashSet<>();
+	private Set<EmployeeDto> employees = new LinkedHashSet<>();
 	// 其他業務資料可供渲染的欄位
 	
 }

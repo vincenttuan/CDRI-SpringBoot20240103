@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EmployeeDTO {
+public class EmployeeDto {
 	
 	private Long id; // 員工序號
 	private String name; // 員工姓名
 	
-	private DepartmentDTO department;
+	private DepartmentDto department;
 }

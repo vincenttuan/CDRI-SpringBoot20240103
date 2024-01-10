@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.psi.model.dto.DepartmentDTO;
+import com.example.psi.model.dto.DepartmentDto;
 import com.example.psi.service.DepartmentService;
 
 @SpringBootTest
@@ -15,13 +15,13 @@ public class CreateDepartment {
 	// 模擬 controller 新增部門
 	@Test
 	public void addTest() {
-		DepartmentDTO d1 = new DepartmentDTO();
+		DepartmentDto d1 = new DepartmentDto();
 		d1.setName("業務部");
 		
-		DepartmentDTO d2 = new DepartmentDTO();
+		DepartmentDto d2 = new DepartmentDto();
 		d2.setName("資訊部");
 		
-		DepartmentDTO d3 = new DepartmentDTO();
+		DepartmentDto d3 = new DepartmentDto();
 		d3.setName("採購部");
 		
 		// 儲存

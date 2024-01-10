@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.psi.model.dto.EmployeeDTO;
+import com.example.psi.model.dto.EmployeeDto;
 import com.example.psi.service.EmployeeService;
 
 @SpringBootTest
@@ -16,34 +16,34 @@ public class CreateEmployee {
 	@Test
 	public void addTest() {
 		
-		EmployeeDTO emp1 = new EmployeeDTO();
+		EmployeeDto emp1 = new EmployeeDto();
 		emp1.setName("劉一");
 		
-		EmployeeDTO emp2 = new EmployeeDTO();
+		EmployeeDto emp2 = new EmployeeDto();
 		emp2.setName("陳二");
 		
-		EmployeeDTO emp3 = new EmployeeDTO();
+		EmployeeDto emp3 = new EmployeeDto();
 		emp3.setName("張三");
 		
-		EmployeeDTO emp4 = new EmployeeDTO();
+		EmployeeDto emp4 = new EmployeeDto();
 		emp4.setName("李四");
 		
-		EmployeeDTO emp5 = new EmployeeDTO();
+		EmployeeDto emp5 = new EmployeeDto();
 		emp5.setName("王五");
 		
-		EmployeeDTO emp6 = new EmployeeDTO();
+		EmployeeDto emp6 = new EmployeeDto();
 		emp6.setName("趙六");
 		
-		EmployeeDTO emp7 = new EmployeeDTO();
+		EmployeeDto emp7 = new EmployeeDto();
 		emp7.setName("孫七");
 		
-		EmployeeDTO emp8 = new EmployeeDTO();
+		EmployeeDto emp8 = new EmployeeDto();
 		emp8.setName("周八");
 		
-		EmployeeDTO emp9 = new EmployeeDTO();
+		EmployeeDto emp9 = new EmployeeDto();
 		emp9.setName("吳九");
 		
-		EmployeeDTO emp10 = new EmployeeDTO();
+		EmployeeDto emp10 = new EmployeeDto();
 		emp10.setName("鄭十");
 		
 		// 儲存

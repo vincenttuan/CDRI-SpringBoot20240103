@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.psi.model.dto.DepartmentDTO;
+import com.example.psi.model.dto.DepartmentDto;
 import com.example.psi.model.po.Department;
 import com.example.psi.repository.DepartmentRepository;
 import com.example.psi.service.DepartmentService;
@@ -26,7 +26,7 @@ public class ReadDepartment {
 	//@Test
 	public void readOne() {
 		System.out.println("readOne:");
-		DepartmentDTO departmentDTO = departmentService.getDepartmentById(1L);
+		DepartmentDto departmentDTO = departmentService.getDepartmentById(1L);
 		System.out.println("id: " + departmentDTO.getId());
 		System.out.println("name: " + departmentDTO.getName());
 		System.out.println("employee size: " + departmentDTO.getEmployees().size());
@@ -46,8 +46,8 @@ public class ReadDepartment {
 	@Test
 	public void readAll() {
 		System.out.println("readAll:");
-		List<DepartmentDTO> departmentDTOs = departmentService.findAll();
-		for(DepartmentDTO departmentDTO : departmentDTOs) {
+		List<DepartmentDto> departmentDTOs = departmentService.findAll();
+		for(DepartmentDto departmentDTO : departmentDTOs) {
 			System.out.println("id: " + departmentDTO.getId());
 			System.out.println("name: " + departmentDTO.getName());
 			System.out.println("employee size: " + departmentDTO.getEmployees().size());

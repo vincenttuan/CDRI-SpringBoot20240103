@@ -23,24 +23,24 @@
 		<!-- Header -->
 		<div th:include="header :: header"></div>
 		<!-- Content -->
-		<h1>新增員工</h1>
-		<form action="#" th:action="@{/employee/}" th:object="${employeeDTO}" method="post">
+		<h2>員工-新增</h2>
+		<form action="#" th:action="@{/employee/}" th:object="${employeeDto}" method="post">
 			<div class="form-group">
 				<label>部門名稱:</label>
 				<select class="form-control select2" th:field="*{department.id}" id="department.id">
-					<option th:each="d:${departments}" th:value="${d.id}" th:text="${d.name}"></option>
+					<option th:each="d:${departmentDtos}" th:value="${d.id}" th:text="${d.name}"></option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label>員工名稱:</label>
-				<input type="text" th:field="*{name}" id="name" class="form-control" placeholder="請輸入員工名稱">
+				<input type="text" th:field="*{name}" id="name" class="form-control" placeholder="請輸入員工名稱" required>
 			</div>
 			<input type="submit" value="新增員工" class="btn btn-primary" />
 		</form>
 		<p />
-		<h1>全部員工列表</h1>
+		<h2>全部員工列表</h2>
 		<div class="pagination">
-	        <span th:each="pageNum : ${#numbers.sequence(1, employeePageDTO.totalPage)}">
+	        <span th:each="pageNum : ${#numbers.sequence(1, employeePageDto.totalPage)}">
 	            <a th:href="@{/employee/(page=${pageNum - 1})}" th:text="${pageNum}">1</a>
 	        </span>
 	    </div>
@@ -55,7 +55,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="emp : ${employeePageDTO.getEmployees()}">
+				<tr th:each="emp : ${employeePageDto.getEmployees()}">
 					<td th:text="${emp.id}"></td>
 					<td th:text="${emp.name}"></td>
 					<td>
