@@ -2,9 +2,11 @@ package com.example.psi.testing.create;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Comment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 
 import com.example.psi.model.dto.EmployeeDto;
 import com.example.psi.model.dto.ProductDto;
@@ -16,6 +18,8 @@ import com.example.psi.service.EmployeeService;
 import com.example.psi.service.ProductService;
 import com.example.psi.service.PurchaseService;
 import com.example.psi.service.SupplierService;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
 public class CreatePurchase {
@@ -31,6 +35,8 @@ public class CreatePurchase {
 	@Autowired
 	ProductService productService;
 	
+	@Transactional
+	@Commit
 	@Test
 	public void test() {
 		// 資料預備
@@ -62,8 +68,8 @@ public class CreatePurchase {
 		pi2.setProduct(p2); // 配置商品(此採購明細要購買的商品)
 		
 		// 保存
-		purchaseService.add(pu); // 採購單(主檔)
-		purchaseService.addItem(pi2, pu.getId()); // 採購單明細(明細檔)
-		purchaseService.addItem(pi2, pu.getId()); // 採購單明細(明細檔)
+		Long pid = purchaseService.add(pu); // 採購單(主檔)
+		purchaseService.addItem(pi1, pid); // 採購單明細(明細檔)
+		purchaseService.addItem(pi2, pid); // 採購單明細(明細檔)
 	} 
 }

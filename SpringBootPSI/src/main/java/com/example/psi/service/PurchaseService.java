@@ -18,6 +18,8 @@ import com.example.psi.model.po.Supplier;
 import com.example.psi.repository.PurchaseItemRepository;
 import com.example.psi.repository.PurchaseRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PurchaseService {
 	
@@ -31,10 +33,13 @@ public class PurchaseService {
 	private ModelMapper modelMapper;
 	
 	// 新增
-	public void add(PurchaseDto purchaseDto) {
-		Purchase purchase = modelMapper.map(purchaseDto, Purchase.class);
-		purchaseRepository.save(purchase);
+	@Transactional
+	public Long add(PurchaseDto purchaseDto) {
+	    Purchase purchase = modelMapper.map(purchaseDto, Purchase.class);
+	    Purchase savedPurchase = purchaseRepository.saveAndFlush(purchase);
+	    return savedPurchase.getId(); // 返回保存後的 ID
 	}
+
 	
 	// 修改
 	public void update(PurchaseDto purchaseDto, Long id) {
@@ -92,7 +97,7 @@ public class PurchaseService {
 		Purchase purchase = purchaseRepository.findById(pid).get();
 		// 訂單項目與訂單檔(主檔)建立關聯 (ps:由多的一方建立關聯)
 		purchaseItem.setPurchase(purchase);
-		purchaseRepository.save(purchase);
+		purchaseItemRepository.save(purchaseItem);
 	}
 	
 	// 查詢訂單項目單筆

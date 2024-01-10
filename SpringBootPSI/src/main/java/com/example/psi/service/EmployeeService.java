@@ -19,6 +19,8 @@ import com.example.psi.model.po.Employee;
 import com.example.psi.repository.DepartmentRepository;
 import com.example.psi.repository.EmployeeRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class EmployeeService {
 	@Autowired
