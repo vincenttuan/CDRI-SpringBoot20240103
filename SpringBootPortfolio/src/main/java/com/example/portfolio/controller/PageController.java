@@ -22,5 +22,11 @@ public class PageController {
     public String tstock() {
         return "tstock";
     }
+	
+	@GetMapping(value = "/watch")
+    public String watch() {
+        return "watch";
+    }
+    
     
 }
