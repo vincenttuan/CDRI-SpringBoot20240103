@@ -20,7 +20,7 @@
 	
 	<dependencies>
 		
-		<!-- yahoofinance-api -->
+				<!-- yahoofinance-api -->
         <dependency>
             <groupId>com.yahoofinance-api</groupId>
             <artifactId>YahooFinanceAPI</artifactId>
