@@ -12,5 +12,15 @@ public class PageController {
     public String investor() {
         return "investor";
     }
+	
+	@GetMapping(value = "/classify")
+    public String classify() {
+        return "classify";
+    }
+	
+	@GetMapping(value = "/tstock")
+    public String tstock() {
+        return "tstock";
+    }
     
 }

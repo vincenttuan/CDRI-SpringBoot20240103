@@ -9,7 +9,7 @@
                 $("#myTable").on("click", "tr", function () {
                     var id = $(this).find('td').eq(0).text().trim();
                     //console.log(id);
-                    $.get("${pageContext.request.contextPath}/mvc/portfolio/tstock/" + id, function (data, status) {
+                    $.get("/portfolio/tstock/" + id, function (data, status) {
                         console.log(JSON.stringify(data));
                         $("#myform").find("#id").val(data.id);
                         $("#myform").find("#name").val(data.name);
@@ -21,7 +21,7 @@
                     var jsonObj = $('#myform').serializeObject();
                     var jsonStr = JSON.stringify(jsonObj);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/tstock/",
+                        url: "/portfolio/tstock/",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr, //Stringified Json Object
@@ -38,7 +38,7 @@
                     var jsonObj = $('#myform').serializeObject();
                     var jsonStr = JSON.stringify(jsonObj);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/tstock/",
+                        url: "/portfolio/tstock/",
                         type: "PUT",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr, //Stringified Json Object
@@ -54,7 +54,7 @@
                 $("#del").on("click", function () {
                     var id = $("#myform").find("#id").val();
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/tstock/" + id,
+                        url: "/portfolio/tstock/" + id,
                         type: "DELETE",
                         async: false, //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
                         cache: false, //This will force requested pages not to be cached by the browser  
@@ -73,7 +73,7 @@
                 table_list();
             });
             function classify_list() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/classify/", function (datas, status) {
+                $.get("/portfolio/classify/", function (datas, status) {
                     console.log("Datas: " + datas);
                     datas.map(function (data) {
                         $('#classify_id').append('<option value="' + data.id + '">' + data.name + '</option>');
@@ -81,7 +81,7 @@
                 });
             }
             function table_list() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/tstock/", function (datas, status) {
+                $.get("/portfolio/tstock/", function (datas, status) {
                     console.log("Datas: " + datas);
                     $("#myTable tbody > tr").remove();
                     $.each(datas, function (i, item) {
