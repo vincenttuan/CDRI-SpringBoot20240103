@@ -28,5 +28,9 @@ public class PageController {
         return "watch";
     }
     
+	@GetMapping(value = "/watchlist")
+    public String watchlist() {
+        return "watchlist";
+    }
     
 }

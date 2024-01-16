@@ -23,8 +23,11 @@
                             alert('請輸入1000的倍數(1張=1000股)');
                             return;
                         }
+                        
+                        console.log("/portfolio/order/buy/" + tstock_id + "/" + amount);
+                        
                         $.ajax({
-                            url: "${pageContext.request.contextPath}/mvc/portfolio/order/buy/" + tstock_id + "/" + amount,
+                            url: "/portfolio/order/buy/" + tstock_id + "/" + amount,
                             type: "GET",
                             async: true, 
                             cache: false,  
@@ -38,11 +41,11 @@
             });
 
             function watchList() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/watch/" + watch_id, function (data, status) {
+                $.get("/portfolio/watch/" + watch_id, function (data, status) {
                     console.log(JSON.stringify(data));
                     // 請撰寫
                     $("#myTable tbody > tr").remove();
-                    $.each(data.tStocks, function (i, item) {
+                    $.each(data.tstocks, function (i, item) {
                         var html = '<tr>' +
                                 '<td align="center">{0}</td><td>{1}</td><td>{2}</td>' +
                                 '<td align="right">{3}</td><td align="right">{4}</td><td align="right">{5}</td>' +
@@ -81,7 +84,7 @@
             });
             
             function queryHistQuotes(symbol) {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/price/histquotes/" + symbol, function (quotes, status) {
+                $.get("/portfolio/price/histquotes/" + symbol, function (quotes, status) {
                     console.log("quotes: " + quotes);
                     drawChart(symbol, quotes);
                 });

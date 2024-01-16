@@ -35,6 +35,7 @@ public class OrderController {
     @Transactional
     public String buy(HttpSession session, @PathVariable("tstock_id") Integer tstock_id, @PathVariable("amount") Integer amount) {
         Investor login_investor = (Investor)session.getAttribute("investor");
+        //if(login_investor == null) login_investor = investorRepository.findById(1).get();
         Investor investor = investorRepository.findById(login_investor.getId()).get();
         if(investor == null) return "Investor None";
         TStock ts = tStockRepository.findById(tstock_id).get();
@@ -66,6 +67,7 @@ public class OrderController {
     @Transactional
     public String sell(HttpSession session, @PathVariable("id") Integer id, @PathVariable("amount") Integer amount) {
         Investor login_investor = (Investor)session.getAttribute("investor");
+        
         Investor investor = investorRepository.findById(login_investor.getId()).get();
         if(investor == null) return "Investor None";
         

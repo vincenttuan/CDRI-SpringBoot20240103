@@ -1,5 +1,7 @@
 package com.example.portfolio.controller;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.portfolio.model.po.TStock;
+import com.example.portfolio.model.vo.StockPrice;
 import com.example.portfolio.service.PortfolioService;
+import com.google.gson.Gson;
 
 import jakarta.transaction.Transactional;
 import yahoofinance.Stock;
@@ -27,6 +31,10 @@ public class PriceController {
     @Autowired
     private PortfolioService service;
     
+    private Gson gson = new Gson();
+    
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    
     // 個股報價資訊(Watch List用)
     @GetMapping(value = {"/refresh"})
     @Transactional
@@ -37,6 +45,27 @@ public class PriceController {
         for (TStock tStock : list) {
             // 取得報價資訊
             try {
+            	String jsonstring = org.cdri.YahooFinance.getLatestStockData(tStock.getSymbol());
+            	jsonstring = jsonstring.replaceAll("Adj Close", "AdjClose");
+            	StockPrice stockPrice = gson.fromJson(jsonstring, StockPrice.class);
+            	
+            	//Stock stock = YahooFinance.get(tStock.getSymbol());
+                //tStock.setChangePrice(stock.getQuote().getChange());
+                //tStock.setChangePrice(stock.getQuote().getChange());
+                //tStock.setChangeInPercent(stock.getQuote().getChangeInPercent());
+                //tStock.setPreClosed(stock.getQuote().getPreviousClose());
+                //tStock.setPrice(stock.getQuote().getPrice());
+                //tStock.setTransactionDate(stock.getQuote().getLastTradeTime().getTime());
+                //tStock.setVolumn(stock.getQuote().getVolume());
+                
+                
+            	tStock.setPrice(new BigDecimal(stockPrice.AdjClose));
+                tStock.setTransactionDate(sdf.parse(stockPrice.Date));
+                tStock.setVolumn(Long.parseLong(stockPrice.Volume));
+                
+                System.out.println(stockPrice);
+                System.out.println(tStock);
+            	/*
                 Stock stock = YahooFinance.get(tStock.getSymbol());
                 tStock.setChangePrice(stock.getQuote().getChange());
                 tStock.setChangeInPercent(stock.getQuote().getChangeInPercent());
@@ -44,6 +73,7 @@ public class PriceController {
                 tStock.setPrice(stock.getQuote().getPrice());
                 tStock.setTransactionDate(stock.getQuote().getLastTradeTime().getTime());
                 tStock.setVolumn(stock.getQuote().getVolume());
+                */
                 // 更新報價
                 service.gettStockRepository().updatePrice(
                         tStock.getId(), 
