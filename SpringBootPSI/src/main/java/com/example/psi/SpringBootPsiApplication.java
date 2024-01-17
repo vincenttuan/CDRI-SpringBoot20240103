@@ -8,6 +8,7 @@ public class SpringBootPsiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootPsiApplication.class, args);
+		
 	}
 
 }
