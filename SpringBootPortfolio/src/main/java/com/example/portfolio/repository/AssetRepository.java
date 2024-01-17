@@ -10,7 +10,7 @@ import com.example.portfolio.model.po.Asset;
 
 @Repository(value = "assetRepository")
 public interface AssetRepository extends JpaRepository<Asset, Integer>{
-    @Query(value = "SELECT a FROM Asset a WHERE a.invid = ?1")
+	@Query(value = "SELECT a FROM Asset a WHERE a.invid = ?1")
     public List<Asset> findByInvid(@Param("invid") Integer invid);
     
 }
