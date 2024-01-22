@@ -1,37 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charSet="utf-8"/>
     <title>Login Page</title>
 </head>
 <body>
     <h2>Login Form</h2>
     <div>
-        <input type="text" id="username" placeholder="Username" value="admin">
-        <input type="password" id="password" placeholder="Password" value="1234">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
         <button onclick="login()">Login</button>
+        <hr>
+        <button onclick="home()">Home</button> http://localhost:9090/home
+        <hr>
+        <button onclick="hello()">Hello</button> http://localhost:9090/hello
     </div>
     <script>
-    function login() {
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost:9090/ok.html', true);
-        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ':' + password));
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    console.log('Login successful');
-                    alert('Login successful');
-                } else {
-                    console.log('Login failed. Status: ' + xhr.status);
-                    console.log('Response: ' + xhr.responseText);
-                    alert('Login failed');
+    	function hello() {
+    		var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:9090/hello', true);
+            xhr.withCredentials = true; // 确保携带cookie
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.onreadystatechange = function() {
+            	if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var responseBody = xhr.responseText;
+                        alert(responseBody);
+                    } else if (xhr.status === 401) {
+                        alert('用戶未登入或 session 過期');
+                    } else {
+                        alert('Fail');
+                    }
                 }
-            }
-        };
-        xhr.send();
-    }
-</script>
+            };
+            xhr.send();
+    	}
+    	
+    	function home() {
+    		var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:9090/', true);
+            xhr.withCredentials = true; // 确保携带cookie
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.onreadystatechange = function() {
+            	if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var responseBody = xhr.responseText;
+                        alert(responseBody);
+                    } else if (xhr.status === 401) {
+                    	alert('用戶未登入或 session 過期');
+                    } else {
+                        alert('Fail');
+                    }
+                }
+            };
+            xhr.send();
+    	}
     
+        function login() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:9090/login', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.withCredentials = true; // 确保携带cookie
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                    	console.log('Login successful');
+                    	alert('Login successful');
+                    } else {
+                        console.log('Login failed');
+                        alert('Login failed');
+                    }
+                }
+            };
+            var params = 'username=' + encodeURIComponent(document.getElementById('username').value) +
+                         '&password=' + encodeURIComponent(document.getElementById('password').value);
+            xhr.send(params);
+        }
+    </script>
 </body>
 </html>
