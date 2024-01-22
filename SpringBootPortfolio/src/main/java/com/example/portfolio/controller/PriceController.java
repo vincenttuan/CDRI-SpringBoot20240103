@@ -33,7 +33,7 @@ public class PriceController {
     
     private Gson gson = new Gson();
     
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     
     // 個股報價資訊(Watch List用)
     @GetMapping(value = {"/refresh"})
@@ -62,6 +62,11 @@ public class PriceController {
             	tStock.setPrice(new BigDecimal(stockPrice.AdjClose));
                 tStock.setTransactionDate(sdf.parse(stockPrice.Date));
                 tStock.setVolumn(Long.parseLong(stockPrice.Volume));
+                tStock.setOpen(new BigDecimal(stockPrice.Open));
+                tStock.setHigh(new BigDecimal(stockPrice.High));
+                tStock.setLow(new BigDecimal(stockPrice.Low));
+                tStock.setClose(new BigDecimal(stockPrice.Close));
+                
                 
                 System.out.println(stockPrice);
                 System.out.println(tStock);
@@ -82,7 +87,12 @@ public class PriceController {
                         tStock.getPreClosed(), 
                         tStock.getPrice(), 
                         tStock.getTransactionDate(), 
-                        tStock.getVolumn());
+                        tStock.getVolumn(),
+                        tStock.getOpen(),
+                        tStock.getHigh(),
+                        tStock.getLow(),
+                        tStock.getClose());
+                
             } catch (Exception e) {
                 //e.printStackTrace();
             }

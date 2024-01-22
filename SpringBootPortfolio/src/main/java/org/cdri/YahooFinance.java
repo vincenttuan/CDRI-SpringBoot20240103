@@ -32,7 +32,14 @@ public class YahooFinance {
 	private final static String resetColor = "\033[0m";
 
 	public static void main(String[] args) throws ParseException, ClientProtocolException, IOException {
-
+		// https://query1.finance.yahoo.com/v7/finance/download/
+		// 其他參數：
+		// period1: 開始日期
+		// period2: 結束日期
+		// interval: 1d
+		// events: history
+		// https://query1.finance.yahoo.com/v7/finance/download/0050.TW?period1=1614556800&period2=1617244800&interval=1d&events=history
+		
 		System.setProperty("stock.current.api.url", "https://query1.finance.yahoo.com/v7/finance/download/%s");
 
 		System.setProperty("stock.history.api.url",

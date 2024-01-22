@@ -20,7 +20,8 @@ public interface TStockRepository extends JpaRepository<TStock, Integer>{
     
     @Transactional
     @Modifying
-    @Query(value = "UPDATE TStock SET change_price=?2, change_in_percent=?3, pre_closed=?4, price=?5, transaction_date=?6, volumn=?7 WHERE id=?1", nativeQuery = true)
-    public void updatePrice(@Param("id") Integer id, @Param("changePrice") BigDecimal changePrice, @Param("changeInPercent") BigDecimal changeInPercent, @Param("preClosed") BigDecimal preClosed, @Param("price") BigDecimal price, @Param("transactionDate") Date transactionDate, @Param("volumn") Long volumn);
+    @Query(value = "UPDATE TStock SET change_price=?2, change_in_percent=?3, pre_closed=?4, price=?5, transaction_date=?6, volumn=?7, open_price=?8, high_price=?9, low_price=?10, close_price=?11 WHERE id=?1", nativeQuery = true)
+    public void updatePrice(@Param("id") Integer id, @Param("changePrice") BigDecimal changePrice, @Param("changeInPercent") BigDecimal changeInPercent, @Param("preClosed") BigDecimal preClosed, @Param("price") BigDecimal price, @Param("transactionDate") Date transactionDate, @Param("volumn") Long volumn, 
+    		@Param("open") BigDecimal open, @Param("high") BigDecimal high, @Param("low") BigDecimal low, @Param("close") BigDecimal close);
 
 }

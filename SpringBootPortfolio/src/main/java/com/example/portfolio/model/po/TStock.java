@@ -51,8 +51,21 @@ public class TStock implements Serializable {
     private Long volumn;
     
     @Column
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date transactionDate;
+    
+    @Column(name = "open_price") // "open" is a reserved word in MySQL	"
+    private BigDecimal open;
+    
+    @Column(name = "high_price") 
+    private BigDecimal high;
+    
+    @Column(name = "low_price")
+    private BigDecimal low;
+    
+    @Column(name = "close_price")
+    private BigDecimal close;
+    
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "classify_id", referencedColumnName = "id")
