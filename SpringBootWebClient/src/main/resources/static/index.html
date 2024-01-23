@@ -7,8 +7,8 @@
 <body>
     <h2>Login Form</h2>
     <div>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
+        <input type="text" id="username" placeholder="Username" value="admin">
+        <input type="password" id="password" placeholder="Password" value="1234">
         <button onclick="login()">Login</button>
         <button onclick="logout()">Logout</button>
         <hr>
@@ -17,8 +17,37 @@
         <button onclick="hello()">Hello</button> http://localhost:9090/hello
         <hr>
         <button onclick="manager()">Manager</button> http://localhost:9090/manager
+        <hr>
+       	<form id="uploadForm" method="POST" action="http://localhost:9090/upload" enctype="multipart/form-data">
+		    <input type="text" name="name" placeholder="file name">
+		    <input type="file" name="file" placeholder="file">
+		    <button type="submit">Upload</button>
+		</form>
+		<hr>
+		<img id="upload_image" src="" alt="Uploaded Image">
+        
     </div>
     <script>
+   		document.getElementById('uploadForm').addEventListener('submit', function(e) {
+   		    e.preventDefault(); // 阻止表单默认提交行为
+   		    var formData = new FormData(this); // 创建FormData对象
+   		    var xhr = new XMLHttpRequest(); // 创建XMLHttpRequest对象
+
+   		    // 设置请求完成的回调函数
+   		    xhr.onreadystatechange = function() {
+   		        if(xhr.readyState === 4 && xhr.status === 200) {
+   		        	alert('Upload successful: ' + xhr.responseText);
+   		            var imageName = formData.get('name');
+   		            document.getElementById('upload_image').src = 'http://localhost:9090/image?name=' + imageName; // 更新图片的src
+   		        }
+   		    };
+
+   		    // 发送请求
+   		    xhr.open('POST', 'http://localhost:9090/upload', true);
+   		    xhr.send(formData);
+   		});
+    	
+    
 	    function manager() {
 			var xhr = new XMLHttpRequest();
 	        xhr.open('GET', 'http://localhost:9090/manager', true);

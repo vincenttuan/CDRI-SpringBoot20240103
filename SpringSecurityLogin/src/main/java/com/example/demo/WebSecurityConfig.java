@@ -68,7 +68,7 @@ public class WebSecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // 禁用CSRF（跨站請求偽造）保護
             .authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/login", "/css/**", "/js/**", "/images/**").permitAll() // 允許對/login和靜態資源（如CSS、JS、圖片）的訪問，無需認證
+                .requestMatchers("/login", "/image", "/upload", "/css/**", "/js/**", "/images/**").permitAll() // 允許對/login和靜態資源（如CSS、JS、圖片）的訪問，無需認證
                 .requestMatchers("/manager").hasRole("ADMIN") // 只有ADMIN角色可以访问/manager
                 .requestMatchers("/", "/hello").hasAnyRole("USER", "ADMIN") // USER和ADMIN角色可以访问/和/hello
                 .anyRequest().authenticated()) // 要求所有其他請求都必須經過認證
