@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charSet="utf-8"/>
-    <title>Login Page</title>
+    <title>Index Page</title>
 </head>
 <body>
     <h2>Login Form</h2>
@@ -10,16 +10,41 @@
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
         <button onclick="login()">Login</button>
+        <button onclick="logout()">Logout</button>
         <hr>
         <button onclick="home()">Home</button> http://localhost:9090/home
         <hr>
         <button onclick="hello()">Hello</button> http://localhost:9090/hello
+        <hr>
+        <button onclick="manager()">Manager</button> http://localhost:9090/manager
     </div>
     <script>
+	    function manager() {
+			var xhr = new XMLHttpRequest();
+	        xhr.open('GET', 'http://localhost:9090/manager', true);
+	        xhr.withCredentials = true; // 確保攜帶 cookie
+	        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	        xhr.onreadystatechange = function() {
+	        	if (xhr.readyState === 4) {
+	                if (xhr.status === 200) {
+	                    var responseBody = xhr.responseText;
+	                    alert(responseBody);
+	                } else if (xhr.status === 401) {
+	                    alert('用戶未登入或 session 過期');
+	                } else if (xhr.status === 403) {
+	                    alert('用戶權限不足');
+	                } else {
+	                    alert('Fail');
+	                }
+	            }
+	        };
+	        xhr.send();
+		}
+	    
     	function hello() {
     		var xhr = new XMLHttpRequest();
             xhr.open('GET', 'http://localhost:9090/hello', true);
-            xhr.withCredentials = true; // 确保携带cookie
+            xhr.withCredentials = true; // 確保攜帶 cookie
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.onreadystatechange = function() {
             	if (xhr.readyState === 4) {
@@ -28,9 +53,11 @@
                         alert(responseBody);
                     } else if (xhr.status === 401) {
                         alert('用戶未登入或 session 過期');
-                    } else {
-                        alert('Fail');
-                    }
+                    } else if (xhr.status === 403) {
+	                    alert('用戶權限不足');
+	                } else {
+	                    alert('Fail');
+	                }
                 }
             };
             xhr.send();
@@ -39,7 +66,7 @@
     	function home() {
     		var xhr = new XMLHttpRequest();
             xhr.open('GET', 'http://localhost:9090/', true);
-            xhr.withCredentials = true; // 确保携带cookie
+            xhr.withCredentials = true; // 確保攜帶 cookie
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.onreadystatechange = function() {
             	if (xhr.readyState === 4) {
@@ -48,9 +75,11 @@
                         alert(responseBody);
                     } else if (xhr.status === 401) {
                     	alert('用戶未登入或 session 過期');
-                    } else {
-                        alert('Fail');
-                    }
+                    } else if (xhr.status === 403) {
+	                    alert('用戶權限不足');
+	                } else {
+	                    alert('Fail');
+	                }
                 }
             };
             xhr.send();
@@ -60,7 +89,7 @@
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://localhost:9090/login', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.withCredentials = true; // 确保携带cookie
+            xhr.withCredentials = true; // 確保攜帶 cookie
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
@@ -76,6 +105,25 @@
             var params = 'username=' + encodeURIComponent(document.getElementById('username').value) +
                          '&password=' + encodeURIComponent(document.getElementById('password').value);
             xhr.send(params);
+        }
+        function logout() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:9090/logout', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.withCredentials = true; // 確保攜帶 cookie
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                    	console.log('Logout successful');
+                    	alert('Logout successful');
+                    } else {
+                        console.log('Logout failed');
+                        alert('Logout failed');
+                    }
+                }
+            };
+            xhr.send();
         }
     </script>
 </body>

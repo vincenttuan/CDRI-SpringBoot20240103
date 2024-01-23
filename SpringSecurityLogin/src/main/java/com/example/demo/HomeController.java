@@ -5,7 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
-
+	
+	@GetMapping("/login")
+    public String login() {
+        return "請登入";
+    }
+	
     @GetMapping("/")
     public String home() {
         return "Welcome to the home page!";
@@ -13,7 +18,12 @@ public class HomeController {
     
     @GetMapping("/hello")
     public String hello() {
-        return "Hello !";
+        return "Hello everyone!";
+    }
+    
+    @GetMapping("/manager")
+    public String manager() {
+        return "Hello Manager !";
     }
 }
 
